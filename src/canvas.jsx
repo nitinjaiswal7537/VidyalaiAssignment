@@ -15,11 +15,11 @@ export default function Canvas() {
     const canvas = canvasRef.current;
     ctx.current = canvas.getContext("2d");
 
-    
+
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
 
-    
+
     const canvasimg = localStorage.getItem("canvasimg");
     if (canvasimg) {
       var image = new Image();
@@ -72,7 +72,7 @@ export default function Canvas() {
     context.fillStyle = "white";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
-    
+
     if (timeout.current !== undefined) clearTimeout(timeout.current);
     timeout.current = setTimeout(function () {
       var base64ImageData = canvas.toDataURL("image/png");
@@ -100,17 +100,14 @@ export default function Canvas() {
   return (
     <>
       <div className="canvas-btn-1">
-      <button onClick={getPen} className="btn-width">
+        <button onClick={getPen} className="btn-width">
           Pencil
         </button>
-        <button className="btn-width " >
-        <input type="color" value={color} onChange={(e) => setColor(e.target.value)} />
+        <button className="btn-width-1 " >
+          <input type="color" value={color} onChange={(e) => setColor(e.target.value)} setSize />
         </button>
         <button className="btn-width">
-        <select 
-            value={size}
-            onChange={(e) => setSize(e.target.value)}
-          >
+          <select value={size} onChange={(e) => setSize(e.target.value)}>
             <option> 1 </option>
             <option> 3 </option>
             <option> 5 </option>
@@ -121,22 +118,22 @@ export default function Canvas() {
             <option> 30 </option>
           </select>
         </button>
-        
-         
-    
-        </div>
-        <div className="canvas-btn-2">
+
+
+
+      </div>
+      <div className="canvas-btn-2">
         <button onClick={clearCanvas} className="btn-width">
           Clear
         </button>
-        
-          <button onClick={eraseCanvas} className="btn-width">
-            Erase
-          </button>
-        
+
+        <button onClick={eraseCanvas} className="btn-width">
+          Erase
+        </button>
+
       </div>
       <canvas
-       style={{ cursor: cursor }}
+        style={{ cursor: cursor }}
         onMouseDown={startPosition}
         onMouseUp={finishedPosition}
         onMouseMove={draw}
